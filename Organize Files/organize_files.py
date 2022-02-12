@@ -5,19 +5,7 @@ from tkinter import filedialog
 
 # File type references to put the file in the corresponding folder
 filetypes = {
-    "Images": [
-        "png",
-        "jpg",
-        "jfif",
-        "webp",
-        "jpeg",
-        "bmp",
-        "tiff",
-        "tiff",
-        "gif",
-        "raw",
-        "psd",
-    ],
+    "Images": ["png", "jpg", "jfif", "webp", "jpeg", "bmp", "tiff", "tiff", "gif", "raw","psd"],
     "Documents": ["doc", "docx", "ppt", "pptx" "xls", "xlsx", "pdf", "txt"],
     "Videos": ["mp4", "mpeg", "mkv", "srt"],
     "Code": ["html", "css", "js", "py", "cpp", "c"],
