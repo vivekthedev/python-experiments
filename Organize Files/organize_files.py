@@ -1,10 +1,23 @@
 from pathlib import Path
 import shutil
+from tkinter import filedialog
 
 
 # File type references to put the file in the corresponding folder
 filetypes = {
-    "Images": ["png", "jpg", "jiff", "jpeg", "bmp", "tiff", "tif", "gif", "raw", "psd"],
+    "Images": [
+        "png",
+        "jpg",
+        "jfif",
+        "webp",
+        "jpeg",
+        "bmp",
+        "tiff",
+        "tiff",
+        "gif",
+        "raw",
+        "psd",
+    ],
     "Documents": ["doc", "docx", "ppt", "pptx" "xls", "xlsx", "pdf", "txt"],
     "Videos": ["mp4", "mpeg", "mkv", "srt"],
     "Code": ["html", "css", "js", "py", "cpp", "c"],
@@ -12,7 +25,8 @@ filetypes = {
     "Compressed": ["zip", "tar", "rar"],
 }
 # Path where the files need to be sorted/organize
-PATH = Path("C:/Users/Vivek/Downloads")
+p = filedialog.askdirectory()
+PATH = Path(p)
 files = []
 # A list to store all the files in the PATH
 
