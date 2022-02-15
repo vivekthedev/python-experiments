@@ -26,36 +26,39 @@ filetypes = {
 }
 # Path where the files need to be sorted/organize
 p = filedialog.askdirectory()
-PATH = Path(p)
-files = []
-# A list to store all the files in the PATH
 
-# All the files will go to the organized folder
-dest = PATH / "Organized"
-# Make the folder only if it does not exists
-dest.mkdir(exist_ok=True)
+# Only run if a valid path is provided
+if p:
+    PATH = Path(p)
+    files = []
+    # A list to store all the files in the PATH
 
-# iterate every file and directory and store only the files in the 'files' list (line 16)
-for i in PATH.iterdir():
-    if i.is_file():
-        files.append(i)
+    # All the files will go to the organized folder
+    dest = PATH / "Organized"
+    # Make the folder only if it does not exists
+    dest.mkdir(exist_ok=True)
 
-# traverse on every file check the file type and move it to the corresponding folder
-for file in files:
-    # done flag tells that the file belong to a dictionary value
-    done = 0
-    # iterate over the keys and check if the file belong to the particular key
-    for k in filetypes.keys():
-        # Check if the file extention is in the values of the key
-        if file.suffix[1:] in filetypes[k]:
-            done = 1
-            # make a new folder with `key name` and move the file there
-            destf = dest / f"{k}"
+    # iterate every file and directory and store only the files in the 'files' list (line 16)
+    for i in PATH.iterdir():
+        if i.is_file():
+            files.append(i)
+
+    # traverse on every file check the file type and move it to the corresponding folder
+    for file in files:
+        # done flag tells that the file belong to a dictionary value
+        done = 0
+        # iterate over the keys and check if the file belong to the particular key
+        for k in filetypes.keys():
+            # Check if the file extention is in the values of the key
+            if file.suffix[1:] in filetypes[k]:
+                done = 1
+                # make a new folder with `key name` and move the file there
+                destf = dest / f"{k}"
+                destf.mkdir(exist_ok=True)
+                shutil.move(str(file.resolve()), str(destf))
+
+        if done != 1:
+            # if the file was not present in the dictionary the make Others folder  and move the file there
+            destf = dest / "Others"
             destf.mkdir(exist_ok=True)
             shutil.move(str(file.resolve()), str(destf))
-
-    if done != 1:
-        # if the file was not present in the dictionary the make Others folder  and move the file there
-        destf = dest / "Others"
-        destf.mkdir(exist_ok=True)
-        shutil.move(str(file.resolve()), str(destf))
