@@ -3,9 +3,10 @@ import re
 from bs4 import BeautifulSoup
 from random import choice
 
-# plate = "UP32AT5471"
+# Example Number to search
+# plate = "UP32AT5472"
 
-
+# get request to get the number token from the website which we need later to get the info
 def get_request_for_number(plate):
     headers = {
         #    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0",
@@ -14,8 +15,7 @@ def get_request_for_number(plate):
     res = session.get(url, verify=False)
     return re.findall('token = "([^"]*)"', res.text)[0]
 
-
-# --- POST ---
+# post function to post our number and plate number to get the details in the form of soup
 def post_request_for_number(number, plate):
     headers = {
         "User-Agent": choice(agent),
@@ -30,13 +30,16 @@ def post_request_for_number(number, plate):
     soup = BeautifulSoup(res.text, "html.parser")
     return soup
 
-
+# input for license plate number with regex to eliminate wrong numbers
 plate = input("Enter the Plate Number ")
 pattern = "^[A-Z]{2}[0-9]{1,2}(?:[A-Z])?(?:[A-Z]*)?[0-9]{4}"
 m = re.match(pattern, plate)
+
+# Make a request if the number was valid
 if m:
     session = requests.Session()
     number = get_request_for_number(plate)
+# Agent values for User-Agent to avoid bot protection
     agent = [
         "Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0",
         "Mozilla/5.0",
@@ -52,9 +55,10 @@ if m:
         "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0) Gecko/20100101 Firefox/15.0.1",
     ]
     soup = post_request_for_number(number, plate)
+# If the bot detected and text is 'R' the remake the request
     while soup.find_all("td")[2].text == "R":
         soup = post_request_for_number(number, plate)
-
+# Show the information in tabular form
     for row in soup.find_all("tr"):
         cols = row.find_all("td")
 
