@@ -9,6 +9,7 @@
 - [Get Saved Wi-Fi Passwords](https://github.com/vivekthedev/python-experiments/tree/main/Get%20Saved%20Wi-Fi%20Passwords)
 - [PDF Functions GUI](https://github.com/vivekthedev/python-experiments/tree/main/PDF%20Functions)
 - [Organize Files](https://github.com/vivekthedev/python-experiments/tree/main/Organize%20Files)
+- [License Plate Information](https://github.com/vivekthedev/python-experiments/tree/main/License%20Plate%20Information)
 - [One Liners](https://github.com/vivekthedev/python-experiments/tree/main/Python%20Oneliners)
 
 ## Contributing
